@@ -5,7 +5,8 @@ Bilgisayar kitaplarinin fiyatlari belli basli siteden kaziyan(scraper), sadece t
 (dr.com.tr , n11.com)
 
 ## Spiders List
-    <ul>
-        <li>dr.com.tr-lessinfo</li>
-        <li>dr.com.tr-moreinfo</li>
-    </ul>
+<ul>
+    <li>dr.com.tr-lessinfo</li>
+    <li>dr.com.tr-moreinfo</li>
+    <li>n11.com-lessinfo</li>
+</ul>
