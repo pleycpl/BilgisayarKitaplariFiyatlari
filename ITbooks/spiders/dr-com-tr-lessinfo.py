@@ -1,5 +1,5 @@
 import scrapy
-# scrapy crawl dr.com.tr out-less.json
+# scrapy crawl dr.com.tr-lessinfo -o out-less.json
 class DrSpider(scrapy.Spider):
     name = 'dr.com.tr-lessinfo'
     allowed_domains = ['dr.com.tr']
@@ -8,16 +8,23 @@ class DrSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        items = response.css('.item-name')
+        items = response.css('.content')
         for item in items:
-            url = item.css('::attr(href)').extract_first()
-            url = url[:-1] # space
-            title = item.css('::attr(title)')
+            title = item.xpath('.//a/@title').extract_first()
+            href = item.xpath('.//a/@href').extract_first()
+            img = item.xpath('.//a//img/@src').extract_first()
+            who = item.css('.who::text').extract_first()
+            publisher = item.css('.who').css('.mb10::text').extract_first()
             price = item.css('.price::text').extract_first()
             old_price = item.css('.old-price::text').extract_first()
+            discount = item.css('.discount-category::text').extract_first()
             yield {
-                'url': url,
-                'title': title,
-                'price': price,
-                'oldPrice': old_price,
+                'title'     : title,
+                'url'       : href,
+                'img'       : img,
+                'who'       : who,
+                'publisher' : publisher,
+                'price'     : price,
+                'old_price' : old_price,
+                'discount'  : discount,
             }
