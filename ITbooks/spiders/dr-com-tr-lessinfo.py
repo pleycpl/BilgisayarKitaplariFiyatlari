@@ -1,11 +1,16 @@
 import scrapy
-# scrapy crawl dr.com.tr-lessinfo -o out-less.json
+# scrapy crawl dr.com.tr-lessinfo -o out-dr-less.json
+
 class DrSpider(scrapy.Spider):
     name = 'dr.com.tr-lessinfo'
     allowed_domains = ['dr.com.tr']
-    start_urls = [
-        'http://www.dr.com.tr/kategori/Kitap/Egitim-Basvuru/Bilgisayar'
-    ]
+    liste = []
+    base_url = 'http://www.dr.com.tr/kategori/Kitap/Egitim-Basvuru/Bilgisayar#/page='
+    for i in range(1, 31):
+        url = base_url + str(i)
+        liste.append(url)
+
+    start_urls = liste
 
     def parse(self, response):
         items = response.css('.content')

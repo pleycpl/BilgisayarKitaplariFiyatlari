@@ -1,5 +1,5 @@
 import scrapy
-# scrapy crawl n11.com out2.json
+# scrapy crawl n11.com out-n11-less.json
 
 class N11Spider(scrapy.Spider):
     name = 'n11.com-lessinfo'

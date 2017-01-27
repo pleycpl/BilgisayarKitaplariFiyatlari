@@ -1,5 +1,6 @@
 import scrapy
-# scrapy crawl dr.com.tr out-more.json
+# scrapy crawl dr.com.tr out-dr-more.json
+
 class DrSpider(scrapy.Spider):
     name = 'dr.com.tr-moreinfo'
     allowed_domains = ['dr.com.tr']
