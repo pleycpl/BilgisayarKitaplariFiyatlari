@@ -1,0 +1,44 @@
+import scrapy
+# scrapy crawl dr.com.tr out.json
+# Blocking IP , site adding suffix (%20) to link
+class DrSpider(scrapy.Spider):
+    name = 'dr.com.tr'
+    allowed_domains = ['dr.com.tr']
+    start_urls = [
+        'http://www.dr.com.tr/kategori/Kitap/Egitim-Basvuru/Bilgisayar'
+    ]
+
+    def parse(self, response):
+        items = response.css('.item-name')
+        for item in items:
+            url = item.css('::attr(href)').extract_first()
+            print('\n\n' + url + '\n\n')
+            url = url[:]
+            title = item.css('::attr(title)')
+            price = item.css('.price::text').extract_first()
+            old_price = item.css('.old-price::text').extract_first()
+            absolute_url = response.urljoin(url)
+            print('\n\n' + absolute_url + '\n\n')
+            yield scrapy.Request(absolute_url, callback=self.parse_books)
+
+    def parse_books(self, response):
+        product_name = response.css('h1.product-name::text').extract_first()
+        author, publisher = response.css('.author').xpath('.//span/text()').extract()
+        # price = response.css('.price::text').extract_first() , it doesnt working, because blocking or diable display
+        # old_price = item.css('.old-price::text').extract_first(), it doesnt working, because blocking
+        content = response.css('.summary').xpath('.//p').extract_first() # we must strip <br> <b> and <p> tags
+        comments = []
+        for comment in response.css('.comment'):
+            comment_content = {
+                'content' : comment.css('.comment-content').extract_first(),
+                'detail' : comment.css('.comment-details').extract_first(),
+            }
+            comments.append(comment_content)
+
+        yield {
+            'product_name' : product_name,
+            'author' : author,
+            'publisher' : publisher,
+            'content' : content,
+            'comments' : comments
+        }
