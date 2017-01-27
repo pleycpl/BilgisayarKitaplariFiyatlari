@@ -12,15 +12,8 @@ class N11Spider(scrapy.Spider):
         items = response.css('.columnContent')
         for item in items:
             url = item.css('.plink::attr(href)').extract_first()
-            if url is None:
-                continue
-            #title = item.css('.plink::attr(title)').extract_first()
-            #img = item.css('.lazy::attr(data-original)').extract_first()
-            #old_price = item.css('.oldPrice').xpath('.//del/text()').extract_first()
-            #price = item.css('.newPrice').xpath('.//text()').extract_first()
-            #saller = item.css('.sallerInfo::attr(title)').extract_first()
-
-            yield scrapy.Request(response.urljoin(url), callback=self.parse_books)
+            if url is not None:
+                yield scrapy.Request(response.urljoin(url), callback=self.parse_books)
 
         next_page = response.css('.pagination .next::attr(href)').extract_first()
         if next_page is not None:
