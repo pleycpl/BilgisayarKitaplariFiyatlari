@@ -26,6 +26,7 @@ class DrSpider(scrapy.Spider):
         author, publisher = response.css('.author').xpath('.//span/text()').extract()
         # price = response.css('.price::text').extract_first() , it doesnt working, because blocking or diable display
         # old_price = item.css('.old-price::text').extract_first(), it doesnt working, because blocking
+        pic = response.css('.img-responsive::attr(src)').extract_first()
         content = response.css('.summary').xpath('.//p').extract_first() # we must strip <br> <b> and <p> tags
         comments = []
         for comment in response.css('.comment'):
