@@ -1,5 +1,5 @@
 import scrapy
-# scrapy crawl n11.com out-n11-less.json
+# scrapy crawl n11.com-lessinfo -o out-n11-less.json
 
 class N11Spider(scrapy.Spider):
     name = 'n11.com-lessinfo'
@@ -28,3 +28,6 @@ class N11Spider(scrapy.Spider):
                 'price': price,
                 'saller': saller,
             }
+        next_page = response.css('.pagination .next::attr(href)').extract_first()
+        if next_page is not None:
+            yield scrapy.Request(url=next_page, callback=self.parse)

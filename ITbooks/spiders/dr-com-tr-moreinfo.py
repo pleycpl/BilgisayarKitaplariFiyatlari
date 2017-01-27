@@ -1,5 +1,5 @@
 import scrapy
-# scrapy crawl dr.com.tr out-dr-more.json
+# scrapy crawl dr.com.tr-moreinfo -o out-dr-more.json
 
 class DrSpider(scrapy.Spider):
     name = 'dr.com.tr-moreinfo'
@@ -13,9 +13,9 @@ class DrSpider(scrapy.Spider):
         for item in items:
             url = item.css('::attr(href)').extract_first()
             url = url[:-1] # space
-            title = item.css('::attr(title)')
-            price = item.css('.price::text').extract_first()
-            old_price = item.css('.old-price::text').extract_first()
+            #title = item.css('::attr(title)')
+            #price = item.css('.price::text').extract_first()
+            #old_price = item.css('.old-price::text').extract_first()
             yield scrapy.Request(response.urljoin(url), callback=self.parse_books)
 
     def parse_books(self, response):
