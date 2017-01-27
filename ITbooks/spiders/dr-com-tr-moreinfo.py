@@ -1,7 +1,7 @@
 import scrapy
-# scrapy crawl dr.com.tr out.json
+# scrapy crawl dr.com.tr out-more.json
 class DrSpider(scrapy.Spider):
-    name = 'dr.com.tr'
+    name = 'dr.com.tr-moreinfo'
     allowed_domains = ['dr.com.tr']
     start_urls = [
         'http://www.dr.com.tr/kategori/Kitap/Egitim-Basvuru/Bilgisayar'
