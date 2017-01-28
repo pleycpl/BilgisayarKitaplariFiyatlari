@@ -5,10 +5,19 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item, Field
 
-
-class ItbooksItem(scrapy.Item):
+class ItbooksItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+
+class DrItemLessInfo(Item):
+    title       = Field()
+    url         = Field()
+    img         = Field()
+    who         = Field()
+    publisher   = Field()
+    price       = Field()
+    old_price   = Field()
+    discount    = Field()
