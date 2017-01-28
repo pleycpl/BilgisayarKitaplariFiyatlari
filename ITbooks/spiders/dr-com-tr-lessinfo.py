@@ -1,6 +1,7 @@
-import scrapy
 # scrapy crawl dr.com.tr-lessinfo -o out-dr-less.json
+import scrapy
 
+# scraping data all web pages
 class DrSpider(scrapy.Spider):
     name = 'dr.com.tr-lessinfo'
     allowed_domains = ['dr.com.tr']
