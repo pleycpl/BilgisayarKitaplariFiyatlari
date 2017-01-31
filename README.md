@@ -9,4 +9,5 @@ Bilgisayar kitaplarinin fiyatlari belli basli siteden kaziyan(scraper), sadece t
     <li>dr.com.tr-lessinfo</li>
     <li>dr.com.tr-moreinfo</li>
     <li>n11.com-lessinfo</li>
+    <li>n11.com-moreinfo</li>
 </ul>
